@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Laravel Welcome2</title>
+    <title>Laravel Welcome</title>
 
     <!--Favicon layout-->
     <link rel="icon" href="{{asset('images/logo_community_links.png') }}">
