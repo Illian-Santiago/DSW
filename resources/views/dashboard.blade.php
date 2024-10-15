@@ -8,29 +8,8 @@
     
     <!-- Notifications Section -->
     <div class="mt-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4">
-        <x-community-add-link/>
-    </div>
-
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900 dark:text-gray-100">
-                    {{ __("Here you will see the Community Links!") }}
-
-                    <!--Hace que por cada link en el array de links, 
-                    se cree una lista con el titulo del link que toque.-->
-                    @foreach ($links as $link)
-                    <li>{{$link->title}}</li>
-
-                    <!--Aprovechando el array de los links anteriormente creado, 
-                    hacemos que coja el nombre del creador del enlace que toque,
-                    así como la fecha de ultima modificación.-->
-                    <small>Contributed by: {{$link->creator->name}} {{$link->updated_at->diffForHumans()}}</small>
-                    @endforeach
-                    {{$links->links()}}
-                </div>
-            </div>
-        </div>
+        <x-community-add-link :channels="$channels"/>
+        <x-community-links :links="$links"/>
     </div>
 
     <div class="flex">

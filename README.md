@@ -64,3 +64,44 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 ## License
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+
+
+#########################     Respuestas      ############################
+1)
+$channels = Channel::orderBy('title','asc')->get();
+
+¿Qué hace el código anterior?
+Se declara la variable "channels" para guardar la colección (gracias al "get") resultante de hacer la consulta a la table Channel en la base de datos y que se ordene por el título de forma ascendente.
+
+
+
+2)
+<div class="mb-4">
+    <label for="Channel" class="block text-white font-medium">Channel:</label>
+
+    <select class="@error('channel_id') is-invalid @enderror mt-1 block w-full rounded-md border-gray-600 bg-gray-70text-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500" name="channel_id">
+    
+        <option selected disabled>Pick a Channel...</option>
+        
+        @foreach ($channels as $channel)
+            <option value="{{ $channel->id }}"> {{ $channel->title }} </option>
+        @endforeach
+    </select>
+
+    @error('channel_id') <span class="text-red-500 mt-2">{{ $message }}</span> @enderror
+</div>
+
+Explica qué hace el código anterior.
+Crea un elemento div donde meter la nueva opción, el elemento lavel le dice al usuario que se va a insertar, el select sería como el input en las otras opciones, pero esta vez lo hacemos así para que al usuario le salga una lista donde pueda elegir el input, esta lista esta definida por el "foreach" que recorre todos los registros de la tabla "Channels" y por cada uno crea una opción.
+
+
+
+3)
+<option value="{{ $channel->id }}" {{ old('channel_id') == $channel->id ? 'selected' : '' }}>
+    {{ $channel->title }}
+</option>
+
+Explica qué es lo que hace la línea anterior.
+Modifica el codigo anterior para que revise si el valor del "channel_id" anterior coincide con el identificador del canal nuevo que se va a crear, si es así se le asigna el atributo "selected".
