@@ -6,8 +6,6 @@
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-6 text-gray-900 dark:text-gray-100">
-                {{ __("Here you will see the Community Links!") }}
-
                 @if ($links->isEmpty())
                     {{'No hay links con aprovados.'}}
                 @else
@@ -19,10 +17,17 @@
                                 {{$link->title}}
                             </p>
 
-                            <span class="inline-block px-2 py-1 text-white text-sm font-semibold rounded"
-                                style="background-color: {{ $link->channel->color }}">
-                                {{$link->channel->title}}
-                            </span>
+                            @if ($link->approved)
+                                <span class="inline-block px-2 py-1 text-white text-sm font-semibold rounded"
+                                    style="background-color: {{ $link->channel->color }}">
+                                    {{$link->channel->title}}
+                                </span>
+                            @else
+                                <span class="inline-block px-2 py-1 text-white text-sm font-semibold rounded"
+                                    style="background-color: Orange;">
+                                    Not approved
+                                </span>
+                            @endif
                         </div>
                     @endforeach
 

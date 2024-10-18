@@ -16,6 +16,10 @@ Route::get('/contact', function () {
     return view('contact');
 })->middleware(['auth', 'verified'])->name('contact');
 
+Route::get('/myLinks', [CommunityLinkController::class, 'myLinks'])
+->middleware(['auth', 'verified'])
+->name('myLinks');
+
 Route::get('/analytics', function () {
     return view('analytics');
 })->middleware(['auth', 'verified'])->name('analytics');
