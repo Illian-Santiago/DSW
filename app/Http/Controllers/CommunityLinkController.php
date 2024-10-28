@@ -54,7 +54,7 @@ class CommunityLinkController extends Controller
             $link->save();
     
             if (!Auth::user()->trusted) {
-                return back()->with('status', 'Your link is under review for approval.');
+                return back()->with('info', 'Your link is under review for approval.');
             }
 
             

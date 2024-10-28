@@ -15,8 +15,6 @@
                                 {{$link->title}}
                             </p>
 
-                            <a href="/dashboard/{{ $link->channel->slug }}">
-
                             @if ($link->approved)
                                 <span class="inline-block px-2 py-1 text-white text-sm font-semibold rounded"
                                     style="background-color: {{ $link->channel->color }}">
