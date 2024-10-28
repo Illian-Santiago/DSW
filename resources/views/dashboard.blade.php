@@ -4,7 +4,7 @@
                 {{ __('Community Contributions') }}
             </h2>
     </x-slot>
-    
+    <x-alert_user_status/>
     <div class="mt-6 bg-white dark:bg-gray-800 rounded-lg shadow-lg p-4">
         <x-community-add-link :channels="$channels"/>
         <x-community-links :links="$links"/>

@@ -1,7 +1,5 @@
 @props(['links'])
 
-<x-alert_user_status/>
-
 <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
@@ -16,6 +14,8 @@
                             <p class="text-lg font-semibold text-blue-600 hover:underline">
                                 {{$link->title}}
                             </p>
+
+                            <a href="/dashboard/{{ $link->channel->slug }}">
 
                             @if ($link->approved)
                                 <span class="inline-block px-2 py-1 text-white text-sm font-semibold rounded"
