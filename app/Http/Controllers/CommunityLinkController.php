@@ -14,7 +14,8 @@ class CommunityLinkController extends Controller
      * Display a listing of the resource.
      */
     public function index()
-    {$links = CommunityLink::where('approved', true)->latest('updated_at')->paginate(10);
+    {
+        $links = CommunityLink::where('approved', true)->latest('updated_at')->paginate(10);
         $channels = Channel::orderBy('title','asc')->get();
         
         return view('dashboard', compact('links', 'channels'));
