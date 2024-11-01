@@ -27,6 +27,8 @@
                                     Not approved
                                 </span>
                             @endif
+
+                            {{ $link->users()->count() }}
                         </div>
                     @endforeach
 
