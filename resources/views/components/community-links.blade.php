@@ -5,7 +5,7 @@
         <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
             <div class="p-6 text-gray-900 dark:text-gray-100">
                 @if ($links->isEmpty())
-                    {{'No hay links con aprovados.'}}
+                    {{'No hay links con aprobados.'}}
                 @else
                     <!-- Bucle para generar la lista de enlaces -->
                     @foreach ($links as $link)
@@ -14,8 +14,9 @@
                             <p class="text-lg font-semibold text-blue-600 hover:underline">
                                 {{$link->title}}
                             </p>
-
+                            
                             @if ($link->approved)
+                                <a href="/dashboard/{{ $link->channel->slug }}">
                                 <span class="inline-block px-2 py-1 text-white text-sm font-semibold rounded"
                                     style="background-color: {{ $link->channel->color }}">
                                     {{$link->channel->title}}

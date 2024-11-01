@@ -69,10 +69,5 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 
 #########################     Respuestas      ############################
---- Tabla de casos de uso
-
-Aproved     Trusted
-   0           0
-   0           1
-   1           0
-   1           1
+¿Qué es el implicit model binding?
+Es una funcionalidad de Laravel que te permite obtener informacion automáticamente de la instancia requerida sin tener que buscarla, por ejemplo por la ID, esto lo hace al ponerle el modelo al que pertence la instancia, en el caso de este ejercicio: "public function index(Channel $channel = null)" al especificarle el modelo (Channel), la instancia ($channel) que se va a usar ya sera buscada automaticamente. Como se puede observar, esto requiere que se use "type-hinting" la instancia.
