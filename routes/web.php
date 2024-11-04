@@ -2,7 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CommunityLinkController; 
+use App\Http\Controllers\CommunityLinkController;
+use App\Http\Controllers\CommunityLinkUserController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -13,6 +14,9 @@ Route::get('/dashboard', [CommunityLinkController::class, 'index'])
 ->name('dashboard');
 
 Route::get('dashboard/{channel:slug}', [CommunityLinkController::class, 'index']);
+
+Route::post('/votes/{link}', [CommunityLinkUserController::class, 'store'])
+->middleware(['auth', 'verified']);
 
 Route::get('/contact', function () {
     return view('contact');

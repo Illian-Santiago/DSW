@@ -28,10 +28,18 @@
                                 </span>
                             @endif
 
-                            {{ $link->users()->count() }}
+                            <form method="POST" action="/votes/{{ $link->id }}">
+                            @csrf
+                                <button type="submit"
+                                        class="{{ Auth::check() && Auth::user()->votedFor($link) ?
+                                        'bg-green-500 hover:bg-green-600 text-white' :
+                                        'bg-gray-500 hover:bg-gray-600 text-white'
+                                        }}">
+                                    {{ $link->users()->count() }}
+                                </button>
+                            </form>
                         </div>
                     @endforeach
-
                     <!-- Paginación -->
                     <div class="mt-6"> {{$links->links()}} </div>
 
