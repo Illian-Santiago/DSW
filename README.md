@@ -69,15 +69,24 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 
 #########################     Respuestas      ############################
-¿Qué consulta Eloquent has utilizado para obtener el id de un usuario trusted?
-
-$usuarioVerificado = App\Models\User::Where('trusted', 1)->get('id');
-Llamo a la clase User y le digo que me devuelva el ID de aquellos que tengan el trusted en 1.
+¿Qué sucedería si no incluyes la opción --model al crear el controlador?
+Que en el nuevo controlador no se generaran las funciones para crear, leer, actualizar y eliminar registros de la base de datos.
 
 
 
+¿Explica línea a línea qué hace este método?
+public function store(CommunityLink $link) { //Declaramos el método store y le decimos que recibe un objeto CommunityLink ($link)
+    $vote = CommunityLinkUser::firstOrNew(['user_id' => Auth::id(), 'community_link_id' => $link->id]); //Busca o crea un voto que tenga el id de usuario que inicio secion y del link que se le indica y lo guarda en la variable $vote.
+    
+    if ($vote->id) //Si el voto existe lo borra y si no lo crea
+        $vote->delete();
+    else
+        $vote->save();
+    
+    return back(); // Nos manda a la pestaña anterior
+}
 
-¿Qué consulta Eloquent has utilizado para obtener el id de un link aprovado del usuario anterior?
 
-$linkAprovado = App\Models\CommunityLink::Where('approved', 1)->get('id');
-LLamo a la clase CommunityLink y le digo que me devuelva el ID de aquellos que tengan el campo approved en 1.
+
+¿Por qué esto no representa un problema de seguridad?
+Porque el usuario ya se autentifica antes de llegar a usar esta función.
