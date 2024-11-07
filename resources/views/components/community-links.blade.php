@@ -3,7 +3,24 @@
 <div class="py-12">
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
         <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-            <div class="p-6 text-gray-900 dark:text-gray-100">
+        
+        <ul class="flex space-x-4">
+            <li>
+                <a class="px-4 py-2 rounded-lg {{ request()->exists('popular') ? 'text-blue-500 hover:text-blue-700' : 'text-gray-500 cursor-not-allowed' }}"
+                href="{{ request()->url() }}">
+                Most recent
+                </a>
+            </li>
+            
+            <li>
+                <a class="px-4 py-2 rounded-lg {{ request()->exists('popular') ? 'text-gray-500 cursor-not-allowed' : 'text-blue-500 hover:text-blue-700' }}"
+                href="?popular">
+                Most popular
+                </a>
+            </li>
+        </ul>
+        
+        <div class="p-6 text-gray-900 dark:text-gray-100">
                 @if ($links->isEmpty())
                     {{'No hay links con aprobados.'}}
                 @else
@@ -41,7 +58,7 @@
                         </div>
                     @endforeach
                     <!-- Paginación -->
-                    <div class="mt-6"> {{$links->links()}} </div>
+                    <div class="mt-6">{{ $links->appends($_GET)->links() }}</div>
 
                     <!-- Información del creador y fecha de actualización -->
                     <small class="text-sm text-gray-600 dark:text-gray-400">

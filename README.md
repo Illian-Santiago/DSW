@@ -69,24 +69,27 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 
 #########################     Respuestas      ############################
-¿Qué sucedería si no incluyes la opción --model al crear el controlador?
-Que en el nuevo controlador no se generaran las funciones para crear, leer, actualizar y eliminar registros de la base de datos.
+{{ $links->appends($_GET)->links() }}
+¿Qué contiene la variable $_GET? Explica qué hace la línea anterior.
+
+
+¿Por qué es útil utilizar un namespace?
+<ul class="flex space-x-4">
+    <li>
+        <a class="px-4 py-2 rounded-lg {{ request()->exists('popular') ? 'text-blue-500 hover:text-blue-700' : 'text-gray-500 cursor-not-allowed' }}"
+        href="{{ request()->url() }}">
+        Most recent
+        </a>
+    </li>
+
+    <li>
+        <a class="px-4 py-2 rounded-lg {{ request()->exists('popular') ? 'text-gray-500 cursor-not-allowed' : 'text-blue-500 hover:text-blue-700' }}"
+        href="?popular">
+        Most popular
+        </a>
+    </li>
+</ul>
 
 
 
-¿Explica línea a línea qué hace este método?
-public function store(CommunityLink $link) { //Declaramos el método store y le decimos que recibe un objeto CommunityLink ($link)
-    $vote = CommunityLinkUser::firstOrNew(['user_id' => Auth::id(), 'community_link_id' => $link->id]); //Busca o crea un voto que tenga el id de usuario que inicio secion y del link que se le indica y lo guarda en la variable $vote.
-    
-    if ($vote->id) //Si el voto existe lo borra y si no lo crea
-        $vote->delete();
-    else
-        $vote->save();
-    
-    return back(); // Nos manda a la pestaña anterior
-}
-
-
-
-¿Por qué esto no representa un problema de seguridad?
-Porque el usuario ya se autentifica antes de llegar a usar esta función.
+En el ultimo apartado de la practica se dice que se cree un nuevo método en la clase CommunityLinkQuery para poder filtrar por canal y luego por el más popular. En vez de hacer eso utilice un doble if en el método Index de CommunityLinkController para lograr la funcionalidad dicha, y creo que me funciona pero me gustarís que lo verificara según mis casos de uso y verlo en clase, y si no es lo que se desea creo el nuevo método.
