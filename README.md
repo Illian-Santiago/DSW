@@ -69,27 +69,3 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 
 #########################     Respuestas      ############################
-{{ $links->appends($_GET)->links() }}
-¿Qué contiene la variable $_GET? Explica qué hace la línea anterior.
-
-
-¿Por qué es útil utilizar un namespace?
-<ul class="flex space-x-4">
-    <li>
-        <a class="px-4 py-2 rounded-lg {{ request()->exists('popular') ? 'text-blue-500 hover:text-blue-700' : 'text-gray-500 cursor-not-allowed' }}"
-        href="{{ request()->url() }}">
-        Most recent
-        </a>
-    </li>
-
-    <li>
-        <a class="px-4 py-2 rounded-lg {{ request()->exists('popular') ? 'text-gray-500 cursor-not-allowed' : 'text-blue-500 hover:text-blue-700' }}"
-        href="?popular">
-        Most popular
-        </a>
-    </li>
-</ul>
-
-
-
-En el ultimo apartado de la practica se dice que se cree un nuevo método en la clase CommunityLinkQuery para poder filtrar por canal y luego por el más popular. En vez de hacer eso utilice un doble if en el método Index de CommunityLinkController para lograr la funcionalidad dicha, y creo que me funciona pero me gustarís que lo verificara según mis casos de uso y verlo en clase, y si no es lo que se desea creo el nuevo método.
