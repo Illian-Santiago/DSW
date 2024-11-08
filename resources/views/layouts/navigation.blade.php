@@ -29,12 +29,25 @@
                     </x-nav-link>
                 </div>
 
-                
+
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('myLinks')" :active="request()->routeIs('myLinks')">
                         {{ __('My links') }}
                     </x-nav-link>
                 </div>
+            </div>
+
+            <!-- Formulario para la búsqueda sencilla de registros -->
+            <div class="flex items-center space-x-4">
+                <form action="/dashboard" method="GET" class="flex items-center">
+                    @csrf
+                    <input type="text" name="inputField" placeholder="Escribe algo..."
+                        class="px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 dark:bg-gray-800 dark:border-gray-600 dark:text-gray-300" required>
+                    <button type="submit"
+                        class="ml-2 px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition duration-150">
+                        Enviar
+                    </button>
+                </form>
             </div>
 
             <!-- Settings Dropdown -->
@@ -62,7 +75,7 @@
                             @csrf
 
                             <x-dropdown-link :href="route('logout')"
-                                    onclick="event.preventDefault();
+                                onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                                 {{ __('Log Out') }}
                             </x-dropdown-link>
@@ -99,6 +112,7 @@
             </div>
 
             <div class="mt-3 space-y-1">
+                <img src="{{ asset('storage/' . Auth::user()->image) }}" alt="Profile Image">
                 <x-responsive-nav-link :href="route('profile.edit')">
                     {{ __('Profile') }}
                 </x-responsive-nav-link>
@@ -108,7 +122,7 @@
                     @csrf
 
                     <x-responsive-nav-link :href="route('logout')"
-                            onclick="event.preventDefault();
+                        onclick="event.preventDefault();
                                         this.closest('form').submit();">
                         {{ __('Log Out') }}
                     </x-responsive-nav-link>

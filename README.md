@@ -11,13 +11,13 @@
 
 Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+-   [Simple, fast routing engine](https://laravel.com/docs/routing).
+-   [Powerful dependency injection container](https://laravel.com/docs/container).
+-   Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
+-   Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
+-   Database agnostic [schema migrations](https://laravel.com/docs/migrations).
+-   [Robust background job processing](https://laravel.com/docs/queues).
+-   [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
 
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
@@ -35,19 +35,19 @@ We would like to extend our thanks to the following sponsors for funding Laravel
 
 ### Premium Partners
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+-   **[Vehikl](https://vehikl.com/)**
+-   **[Tighten Co.](https://tighten.co)**
+-   **[WebReinvent](https://webreinvent.com/)**
+-   **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
+-   **[64 Robots](https://64robots.com)**
+-   **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
+-   **[Cyber-Duck](https://cyber-duck.co.uk)**
+-   **[DevSquad](https://devsquad.com/hire-laravel-developers)**
+-   **[Jump24](https://jump24.co.uk)**
+-   **[Redberry](https://redberry.international/laravel/)**
+-   **[Active Logic](https://activelogic.com)**
+-   **[byte5](https://byte5.de)**
+-   **[OP.GG](https://op.gg)**
 
 ## Contributing
 
@@ -65,31 +65,28 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
+######################### Respuestas ############################
+¿Qué hace el método orWhere?
+Hace que si el primer where pase a ver si el siguiente si se cumple, esto nos permite filtrar una misma cosa al mismo tiempo con dos posibilidades, funcionando mas o menos como un if. La función avanzada de orWhere nos permite meter una funcion dentro de la condicion.
 
+¿Por qué no necestiamos un modelo Profile? ¿En qué situación crees que sería necesario crear un modelo Profile independiente?
+es mejor crear un modelo Profile para organizar y gestionar esos datos de manera más efectiva
+Relaciones: Si el perfil del usuario necesita establecer relaciones con otros modelos (por ejemplo, un usuario puede tener múltiples perfiles o un perfil puede estar relacionado con otros modelos como publicaciones, comentarios, etc.), un modelo independiente puede facilitar estas relaciones.
+Escalabilidad: Si se espera que la aplicación crezca y que la funcionalidad de los perfiles se expanda en el futuro, tener un modelo Profile independiente puede hacer que la aplicación sea más escalable y fácil de modificar.
 
+Separación de Responsabilidades: Seguir el principio de separación de responsabilidades puede ser una buena práctica. Tener un modelo Profile independiente puede ayudar a mantener el modelo User más limpio y enfocado en la autenticación y la gestión de usuarios.
 
-#########################     Respuestas      ############################
-{{ $links->appends($_GET)->links() }}
-¿Qué contiene la variable $_GET? Explica qué hace la línea anterior.
+Personalización y Extensibilidad: Si se planea permitir a los usuarios personalizar su perfil de maneras significativas (por ejemplo, configuraciones de privacidad, temas, etc.), un modelo Profile independiente puede proporcionar la flexibilidad necesaria.
+La decisión de crear un modelo Profile independiente depende de las necesidades específicas de tu aplicación y de cómo planeas manejar los datos del usuario. Si la complejidad y la escalabilidad son factores importantes, es recomendable optar por un modelo separado. Por otro lado, si la aplicación es simple y no se espera que crezca en complejidad, mantener los datos en el modelo User puede ser suficiente.
 
+Explica para qué sirve el atributo enctype.
+¿Qué método HTTP se está utilizando en el formulario para actualizar los datos del perfil?
+¿Qué diferencia hay entre ese método y el método PUT?
 
-¿Por qué es útil utilizar un namespace?
-<ul class="flex space-x-4">
-    <li>
-        <a class="px-4 py-2 rounded-lg {{ request()->exists('popular') ? 'text-blue-500 hover:text-blue-700' : 'text-gray-500 cursor-not-allowed' }}"
-        href="{{ request()->url() }}">
-        Most recent
-        </a>
-    </li>
+Pregunta: ¿Qué parámetro tiene el método update del ProfileController?
 
-    <li>
-        <a class="px-4 py-2 rounded-lg {{ request()->exists('popular') ? 'text-gray-500 cursor-not-allowed' : 'text-blue-500 hover:text-blue-700' }}"
-        href="?popular">
-        Most popular
-        </a>
-    </li>
-</ul>
+Pregunta: ¿Cuál es tu sistema de almacenamiento por defecto? Comprueba en el archivo filesystems.php de la carpeta config.
 
+php artisan storage:link
 
-
-En el ultimo apartado de la practica se dice que se cree un nuevo método en la clase CommunityLinkQuery para poder filtrar por canal y luego por el más popular. En vez de hacer eso utilice un doble if en el método Index de CommunityLinkController para lograr la funcionalidad dicha, y creo que me funciona pero me gustarís que lo verificara según mis casos de uso y verlo en clase, y si no es lo que se desea creo el nuevo método.
+Explica en detalle qué es lo que hace el comando anterior.
