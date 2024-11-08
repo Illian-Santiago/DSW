@@ -16,12 +16,20 @@ class CommunityLinkController extends Controller
      */
     public function index(Channel $channel = null)
     {
-        if ($channel) {
-            $links = (new CommunityLinkQuery())->getByChannel($channel);
-        } else {
-            if (request()->exists('popular')) {
-                $links = (new CommunityLinkQuery())->getMostPopular();
+        if (request()->exists('popular')) {
+            if ($channel) {
+                // Obtener los enlaces más populares dentro de un mismo canal
+                $links = (new CommunityLinkQuery())->getMostPopularByChannel($channel);
             } else {
+                // Obtener los enlaces más populares en general
+                $links = (new CommunityLinkQuery())->getMostPopular();
+            }
+        } else {
+            if ($channel) {
+                // Obtener los enlaces más recientes dentro del canal
+                $links = (new CommunityLinkQuery())->getByChannel($channel);
+            } else {
+                // Obtener los enlaces más recientes en general
                 $links = (new CommunityLinkQuery())->getAll();
             }
         }

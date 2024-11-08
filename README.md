@@ -69,3 +69,4 @@ The Laravel framework is open-sourced software licensed under the [MIT license](
 
 
 #########################     Respuestas      ############################
+No me funciono, así que al final cree el método nuevo y lo filtre como se decia en el ejercicio.

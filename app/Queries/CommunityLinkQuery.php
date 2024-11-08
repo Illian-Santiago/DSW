@@ -9,6 +9,7 @@ class CommunityLinkQuery {
     public function getByChannel(Channel $channel) {
         //Filtrar los links por el canal
         $links = $channel->communityLinks()
+        ->where('approved', true)
         ->latest('updated_at')
         ->paginate(10);
 
@@ -31,6 +32,16 @@ class CommunityLinkQuery {
         ->orderby('users_count', 'desc')
         ->paginate(10);
 
+        return $links;
+    }
+
+    public function getMostPopularByChannel(Channel $channel)
+    {
+        $links = $channel->communityLinks()
+            ->where('approved', true)
+            ->withCount('users')
+            ->orderBy('users_count', 'desc')
+            ->paginate(10);
         return $links;
     }
 }
