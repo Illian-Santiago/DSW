@@ -16,34 +16,36 @@ class CommunityLinkController extends Controller
      */
     public function index(Channel $channel = null)
     {
-        if (request()->exists('popular')) {
-            if ($channel) {
-                // Obtener los enlaces más populares dentro de un mismo canal
-                $links = (new CommunityLinkQuery())->getMostPopularByChannel($channel);
-            } else {
-                // Obtener los enlaces más populares en general
-                $links = (new CommunityLinkQuery())->getMostPopular();
-            }
-        } else {
-            if ($channel) {
-                // Obtener los enlaces más recientes dentro del canal
-                $links = (new CommunityLinkQuery())->getByChannel($channel);
-            } else {
-                // Obtener los enlaces más recientes en general
-                $links = (new CommunityLinkQuery())->getAll();
-            }
-        }
-
         $channels = Channel::orderBy('title', 'asc')->get();
+        $query = new CommunityLinkQuery();
+
+        switch (true) {
+            case request()->exists('inputField'):
+                $links = $query->buscarPorNombre(request()->get('inputField'));
+                break;
+
+            case request()->exists('popular'):
+                $links = $query->getMostPopular();
+                break;
+
+            case $channel:
+                $links = $query->getByChannel($channel);
+                break;
+
+            default:
+                $links = $query->getAll();
+                break;
+        }
 
         return view('dashboard', compact('links', 'channels'));
     }
+
 
     public function myLinks()
     {
         $user = Auth::user();
         $links = $user->myLinks()->paginate(10);
-        
+
         return view('myLinks', compact('links'));
     }
 
@@ -64,18 +66,16 @@ class CommunityLinkController extends Controller
         $link = new CommunityLink($data);
 
         $existing = $link->hasAlreadyBeenSubmitted();
-        
+
         if (!$existing) {
             $link->user_id = Auth::id();
             $link->approved = Auth::user()->trusted ?? false;
-            
+
             $link->save();
-    
+
             if (!Auth::user()->trusted) {
                 return back()->with('info', 'Your link is under review for approval.');
             }
-
-            
         }
         return back();
     }
