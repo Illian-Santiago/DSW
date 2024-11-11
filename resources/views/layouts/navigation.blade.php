@@ -112,6 +112,7 @@
             </div>
 
             <div class="mt-3 space-y-1">
+                <img src="{{ asset('storage/' . Auth::user()->image) }}" alt="Profile Image">
                 <x-responsive-nav-link :href="route('profile.edit')">
                     {{ __('Profile') }}
                 </x-responsive-nav-link>
