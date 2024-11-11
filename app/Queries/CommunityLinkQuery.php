@@ -42,7 +42,7 @@ class CommunityLinkQuery
     public function buscarPorNombre(string $input)
     {
         $links = CommunityLink::where('approved', 1) // De los links que estan aprovados
-            ->where('title', 'like', '%' . $input . '%') // Buscamos esque contenga el input del usuario
+            ->whereAny(['title', 'link'], 'like', '%' . $input . '%') // Buscamos esque contenga el input del usuario
             ->latest('updated_at')
             ->paginate(10);
 

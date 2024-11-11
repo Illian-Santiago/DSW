@@ -66,3 +66,5 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
 ######################### Respuestas ############################
+¿Qué hace el método orWhere?
+Hace que si el primer where pase a ver si el siguiente si se cumple, esto nos permite filtrar una misma cosa al mismo tiempo con dos posibilidades, funcionando mas o menos como un if. La función avanzada de orWhere nos permite meter una funcion dentro de la condicion.
