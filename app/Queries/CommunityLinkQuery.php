@@ -17,6 +17,17 @@ class CommunityLinkQuery
         return $links;
     }
 
+    public function getByChannel(Channel $channel)
+    {
+        // Filtrar los links por el canal
+        $links = $channel->communityLinks()
+            ->where('approved', true)
+            ->latest('updated_at')
+            ->paginate(10);
+
+        return $links;
+    }
+
     public function getMostPopular()
     {
         //Muestra los links que han sido votados
@@ -38,14 +49,13 @@ class CommunityLinkQuery
         return $links;
     }
 
-    public function getByChannel(Channel $channel)
+    public function getMostPopularByChannel(Channel $channel)
     {
-        // Filtrar los links por el canal
         $links = $channel->communityLinks()
             ->where('approved', true)
-            ->latest('updated_at')
+            ->withCount('users')
+            ->orderBy('users_count', 'desc')
             ->paginate(10);
-
         return $links;
     }
 }

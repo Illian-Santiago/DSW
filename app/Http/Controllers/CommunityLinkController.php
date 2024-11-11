@@ -25,17 +25,25 @@ class CommunityLinkController extends Controller
                 break;
 
             case request()->exists('popular'):
-                $links = $query->getMostPopular();
-                break;
-
-            case $channel:
-                $links = $query->getByChannel($channel);
+                if ($channel) {
+                    // Obtener los enlaces más recientes dentro del canal
+                    $links = $query->getMostPopularByChannel($channel);
+                } else {
+                    $links = $query->getMostPopular();
+                }
                 break;
 
             default:
-                $links = $query->getAll();
+                if ($channel) {
+                    // Obtener los enlaces más recientes dentro del canal
+                    $links = $query->getByChannel($channel);
+                } else {
+                    $links = $query->getAll();
+                }
                 break;
         }
+
+
 
         return view('dashboard', compact('links', 'channels'));
     }
