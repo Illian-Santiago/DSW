@@ -66,3 +66,14 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
 ######################### Respuestas ############################
+1. ¿Qué hace la opción --dev?
+Indica que lo estamos instalando también debe ser añadido a la sección de "require-dev" en el archivo composer.json
+
+2. En la instalación anterior has tenido que ejectuar artisan vendor:publish --tag=crud. ¿Qué hace esta orden?
+Trae a nuestro proyecto todos los archivos de la carpeta publish de la librería crud que estan en vendor para posteriormente nosotros poder editarlas.
+
+3. ¿Qué hace esta ruta? "Route::resource('users', UserController::class)"
+Hace que en vez de generar varias rutas para el crud de users creamos solo esta que hace el trabajo de todas las demas.
+
+4. Con esta configuración, ¿qué problema de seguridad tenemos en nuestra aplicación?
+Que cualquier usuario puede eliminar, editar y crear usuarios.

@@ -11,33 +11,25 @@ class User extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory, Notifiable;
 
+    protected $perPage = 20;
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
-        'image'
-    ];
+    protected $fillable = ['name', 'email', 'image', 'password', 'trusted'];
+
 
     /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var array<int, string>
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * 
      */
     protected $hidden = [
         'password',
-        'remember_token',
+        'remember_token'
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
     protected function casts(): array
     {
         return [
@@ -45,8 +37,20 @@ class User extends Authenticatable implements MustVerifyEmail
             'password' => 'hashed',
         ];
     }
+    public function communityLinkUsers()
+    {
+        return $this->hasMany(\App\Models\CommunityLinkUser::class, 'id', 'user_id');
+    }
 
-    public function myLinks()
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function communityLinks()
+    {
+        return $this->hasMany(\App\Models\CommunityLink::class, 'id', 'user_id');
+    }
+
+    public function mylinks()
     {
         return $this->hasMany(CommunityLink::class);
     }
