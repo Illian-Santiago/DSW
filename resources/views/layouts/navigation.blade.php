@@ -35,6 +35,14 @@
                         {{ __('My links') }}
                     </x-nav-link>
                 </div>
+
+                @can('administrate', Auth::user())
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
+                        {{ __('Administrate') }}
+                    </x-nav-link>
+                </div>
+                @endcan
             </div>
 
             <!-- Formulario para la búsqueda sencilla de registros -->

@@ -40,7 +40,7 @@ Route::middleware('auth')->group(function () {
 Route::post('/dashboard', [CommunityLinkController::class, 'store'])
     ->middleware(['auth', 'verified']);
 
-Route::resource('/users', UserController::class)
-    ->middleware(['auth', 'verified']);
+Route::resource('users', UserController::class)
+    ->middleware('can:administrate,App\Models\User');
 
 require __DIR__ . '/auth.php';
