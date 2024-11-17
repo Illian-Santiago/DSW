@@ -66,5 +66,12 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
 ######################### Respuestas ############################
-1. Si haces la compración === la política podría no funcionar. ¿Por qué?
-Supongo que es porque funciona como javascript donde los tres iguales es una comparación más estricta que los dos iguales, ya que los primeros mencionados aparte de comparar los valores también compara el tipo de dato, al poner los dos iguales únicamente, estamos haciendo más flexible la condición.
+1. ¿Qué es una API REST?
+
+
+2. ¿Qué diferencia hay entre una API REST y una API RestFul?
+
+3. Consulta el controlador que acabas de crear. ¿Tiene los mismos métodos que la clase CommunityLinkController de la aplicación?
+
+
+4. Consulta las rutas generadas (artisan route:list) y ubica los endpoints donde corresponda al lado de la lista anterior.
