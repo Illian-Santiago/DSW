@@ -66,5 +66,3 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 
 ######################### Respuestas ############################
-1. Si haces la compración === la política podría no funcionar. ¿Por qué?
-Supongo que es porque funciona como javascript donde los tres iguales es una comparación más estricta que los dos iguales, ya que los primeros mencionados aparte de comparar los valores también compara el tipo de dato, al poner los dos iguales únicamente, estamos haciendo más flexible la condición.
