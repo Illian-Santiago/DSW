@@ -39,7 +39,16 @@ class CommunityLinkController extends Controller
      */
     public function show($id)
     {
-        //
+        // Buscar el enlace por id
+        $link = CommunityLink::find($id);
+
+        // Si no se encuentra el enlace, retornar un JSON con mensaje de error
+        if (!$link) {
+            return response()->json(['message' => 'Link no encontrado'], 404);
+        }
+
+        // Retornar el enlace encontrado
+        return response()->json($link, 200);
     }
 
     /**
