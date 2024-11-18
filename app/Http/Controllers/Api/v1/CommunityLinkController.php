@@ -44,7 +44,7 @@ class CommunityLinkController extends Controller
 
         // Si no se encuentra el enlace, retornar un JSON con mensaje de error
         if (!$link) {
-            return response()->json(['message' => 'Link no encontrado'], 404);
+            return response()->json("Link no encontrado", 404);
         }
 
         // Retornar el enlace encontrado
