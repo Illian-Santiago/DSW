@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Api\v1;
 
 use App\Http\Controllers\Controller;
 use App\Models\CommunityLink;
-use Illuminate\Http\Request;
 use App\Queries\CommunityLinkQuery;
+use App\Http\Requests\CommunityLinkForm;
+use Illuminate\Support\Facades\Auth;
 
 class CommunityLinkController extends Controller
 {
@@ -30,9 +31,13 @@ class CommunityLinkController extends Controller
                 break;
         }
 
+        // Si no se encuentra nada, retornar un JSON con mensaje de error
+        if (!$links) {
+            return response()->json("Not found", 404);
+        }
+
         return response()->json($links);
     }
-
 
     /**
      * Display the specified resource.
@@ -56,8 +61,45 @@ class CommunityLinkController extends Controller
      */
     public function store()
     {
-        // Implementar lógica para almacenar un nuevo enlace
+        if (request()->exists('title') && request()->exists('link')) {
+            $link = new CommunityLink();
+            $link->title = request()->get('title');
+            $link->channel_id = request()->get('channel_id');
+            $link->link = request()->get('link');
+            $link->save();
+        }
+
+        return response()->json($link, 200);
+        // if (
+        //     !empty(request()->exists('channel_id'))
+        //     && request()->exists('title')
+        //     && request()->exists('link')
+        // ) {
+        //     # code...
+        // } else {
+        //     return response()->json("The title and the channel id is required or the link must be a valid URL.", 302);
+        // }
+
+
+
+        //     $data = $request->validated();
+        //     $link = new CommunityLink($data);
+
+        //     $existing = $link->hasAlreadyBeenSubmitted();
+
+        //     if (!$existing) {
+        //         $link->user_id = Auth::id();
+        //         $link->approved = Auth::user()->trusted ?? false;
+
+        //         $link->save();
+
+        //         if (!Auth::user()->trusted) {
+        //             return back()->with('info', 'Your link is under review for approval.');
+        //         }
+        //     }
+        //     return back();
     }
+
     /**
      * Update the specified resource in storage.
      */
@@ -65,6 +107,7 @@ class CommunityLinkController extends Controller
     {
         // Implementar lógica para actualizar un enlace
     }
+
     /**
      * Remove the specified resource from storage.
      */
