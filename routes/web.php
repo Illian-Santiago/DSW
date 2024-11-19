@@ -14,6 +14,9 @@ Route::get('/dashboard', [CommunityLinkController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
+Route::post('/dashboard', [CommunityLinkController::class, 'store'])
+    ->middleware(['auth', 'verified']);
+
 Route::get('dashboard/{channel:slug}', [CommunityLinkController::class, 'index']);
 
 Route::post('/votes/{link}', [CommunityLinkUserController::class, 'store'])
@@ -36,9 +39,6 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-
-Route::post('/dashboard', [CommunityLinkController::class, 'store'])
-    ->middleware(['auth', 'verified']);
 
 Route::resource('users', UserController::class)
     ->middleware('can:administrate,App\Models\User');
