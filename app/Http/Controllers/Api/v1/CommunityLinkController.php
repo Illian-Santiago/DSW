@@ -59,45 +59,37 @@ class CommunityLinkController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store()
+    public function store(CommunityLinkForm $request)
     {
-        if (request()->exists('title') && request()->exists('link')) {
-            $link = new CommunityLink();
-            $link->title = request()->get('title');
-            $link->channel_id = request()->get('channel_id');
-            $link->link = request()->get('link');
-            $link->save();
+
+        dd($request);
+        if (!Auth::user()->trusted) {
+            return back()->with('info', 'Your link is under review for approval.');
         }
 
-        return response()->json($link, 200);
-        // if (
-        //     !empty(request()->exists('channel_id'))
-        //     && request()->exists('title')
-        //     && request()->exists('link')
-        // ) {
-        //     # code...
-        // } else {
-        //     return response()->json("The title and the channel id is required or the link must be a valid URL.", 302);
-        // }
+        $data = $request->validated();
+        $link = new CommunityLink($data);
 
+        $existing = $link->hasAlreadyBeenSubmitted();
 
+        if (!$existing) {
+            $link->user_id = Auth::id();
+            $link->approved = Auth::user()->trusted ?? false;
+            $link->save();
 
-        //     $data = $request->validated();
-        //     $link = new CommunityLink($data);
-
-        //     $existing = $link->hasAlreadyBeenSubmitted();
-
-        //     if (!$existing) {
-        //         $link->user_id = Auth::id();
-        //         $link->approved = Auth::user()->trusted ?? false;
-
-        //         $link->save();
-
-        //         if (!Auth::user()->trusted) {
-        //             return back()->with('info', 'Your link is under review for approval.');
-        //         }
-        //     }
-        //     return back();
+            $response = [
+                'status' => 'success',
+                'message' => 'Link created',
+                'data' => $link,
+            ];
+        } else {
+            $response = [
+                'status' => 'success',
+                'message' => 'Link already submitted',
+                'data' => $link,
+            ];
+        }
+        return response()->json($response, 200);
     }
 
     /**
